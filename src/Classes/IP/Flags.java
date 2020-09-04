@@ -10,8 +10,8 @@ public class Flags {
     private boolean moreFragments;
     private int fragmentOffset;
 
-    public Flags(List<Byte> info) {
-        this.value = Functions.getBytesConcatenatedAsInt(info.subList(6, 7));
+    public Flags(List<Integer> info) {
+        this.value = Functions.getBytesConcatenatedAsInt(info);
         this.dontFragment = (((this.value >> 14) & 1) == 1) ? true : false;
         this.moreFragments = (((this.value >> 13) & 1) == 1) ? true : false;
         this.fragmentOffset = Functions.extractBitsAsInteger(this.value, 1, 13);

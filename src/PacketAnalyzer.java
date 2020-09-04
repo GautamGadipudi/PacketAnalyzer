@@ -29,13 +29,13 @@ public class PacketAnalyzer {
 
     public static void main(String[] args) throws IOException {
         String inputFile = "pkt/new_icmp_packet2.bin";
-        List<Byte> info = new ArrayList<>();
+        List<Integer> info = new ArrayList<>();
 
         try (InputStream inputStream = new FileInputStream(inputFile)) {
             byte byteRead;
 
             while ((byteRead = (byte)inputStream.read()) != -1) {
-                info.add(byteRead);
+                info.add(Byte.toUnsignedInt(byteRead));
             }
         }
         catch (IOException ex) {

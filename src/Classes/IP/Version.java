@@ -5,7 +5,7 @@ import Util.Functions;
 public class Version {
     private int value;
 
-    public Version(Byte info) {
+    public Version(Integer info) {
         this.value = Functions.extractBitsAsInteger(info, 5, 4);
     }
 

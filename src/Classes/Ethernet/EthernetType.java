@@ -7,7 +7,7 @@ import java.util.Hashtable;
 import java.util.List;
 
 public class EthernetType {
-    private List<Byte> value;
+    private List<Integer> value;
     private String hexValue;
 
     static final Dictionary<Integer, String> ethernetTypes = new Hashtable() {
@@ -16,7 +16,7 @@ public class EthernetType {
         }
     };
 
-    public EthernetType(List<Byte> ethernetType) {
+    public EthernetType(List<Integer> ethernetType) {
         this.value = ethernetType;
         this.hexValue = Functions.intToHex(ethernetType);
     }

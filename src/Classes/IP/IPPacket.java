@@ -11,12 +11,13 @@ public class IPPacket {
     private int totalLength;
     private int identification;
     private Flags flags;
-    private byte TTL;
+    private int TTL;
+    private Protocol protocol;
     private int headerChecksum;
     private Address sourceAddress;
     private Address destinationAddress;
 
-    public IPPacket(List<Byte> ipPacket) {
+    public IPPacket(List<Integer> ipPacket) {
         this.version = new Version(ipPacket.get(0));
         this.headerLength = Functions.extractBitsAsInteger(ipPacket.get(0), 1, 4) * 4;
         this.trafficClass = new TrafficClass(ipPacket.get(1));
@@ -24,9 +25,10 @@ public class IPPacket {
         this.identification = Functions.getBytesConcatenatedAsInt(ipPacket.subList(4, 6));
         this.flags = new Flags(ipPacket.subList(6, 8));
         this.TTL = ipPacket.get(8);
-        this.headerChecksum = Functions.getBytesConcatenatedAsInt(ipPacket.subList(9, 11));
-        this.sourceAddress = new Address(ipPacket.subList(11, 15));
-        this.destinationAddress = new Address(ipPacket.subList(15, 19));
+        this.protocol = new Protocol(ipPacket.get(9));
+        this.headerChecksum = Functions.getBytesConcatenatedAsInt(ipPacket.subList(10, 12));
+        this.sourceAddress = new Address(ipPacket.subList(12, 16));
+        this.destinationAddress = new Address(ipPacket.subList(16, 20));
     }
 
     @Override
@@ -39,6 +41,7 @@ public class IPPacket {
                 ", identification=" + identification +
                 ", flags=" + flags +
                 ", TTL=" + TTL +
+                ", Protocol=" + protocol +
                 ", headerChecksum=" + headerChecksum +
                 ", sourceAddress=" + sourceAddress +
                 ", destinationAddress=" + destinationAddress +

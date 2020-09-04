@@ -4,11 +4,11 @@ import Util.Functions;
 import java.util.List;
 
 public class DestinationAddress {
-    private List<Byte> value;
+    private List<Integer> value;
     private String hexValue;
 
 
-    public DestinationAddress(List<Byte> address) {
+    public DestinationAddress(List<Integer> address) {
         this.value = address;
         this.hexValue = Functions.intToHex(address);
     }

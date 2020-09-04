@@ -4,9 +4,9 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 public class Protocol {
-    private byte value;
+    private int value;
 
-    Dictionary<Byte, String> protocolCode = new Hashtable() {
+    Dictionary<Integer, String> protocolCode = new Hashtable() {
         {
             put(1, "ICMP");
             put(6, "TCP");
@@ -14,14 +14,14 @@ public class Protocol {
         }
     };
 
-    public Protocol(Byte info) {
+    public Protocol(int info) {
         this.value = info;
     }
 
     @Override
     public String toString() {
         return this.value +
-                " (" + protocolCode +
+                " (" + protocolCode.get(this.value) +
                 ')';
     }
 }

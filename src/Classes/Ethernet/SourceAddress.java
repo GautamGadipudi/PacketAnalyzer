@@ -5,10 +5,10 @@ import Util.Functions;
 import java.util.List;
 
 public class SourceAddress {
-    private List<Byte> value;
+    private List<Integer> value;
     private String hexValue;
 
-    public SourceAddress(List<Byte> address) {
+    public SourceAddress(List<Integer> address) {
         this.value = address;
         this.hexValue = Functions.intToHex(address);
     }

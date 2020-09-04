@@ -4,7 +4,7 @@ public class TrafficClass {
     private DSCP dscp;
     private ECN ecn;
 
-    public TrafficClass(byte info) {
+    public TrafficClass(Integer info) {
         this.dscp = new DSCP(info);
         this.ecn = new ECN(info);
     }

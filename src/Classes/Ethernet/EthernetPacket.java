@@ -14,7 +14,7 @@ public class EthernetPacket {
     private EthernetType ethernetType;
 
 
-    public EthernetPacket(List<Byte> ethernetPacket) {
+    public EthernetPacket(List<Integer> ethernetPacket) {
         this.packetSize = ethernetPacket.size();
         this.destinationAddress = new DestinationAddress(ethernetPacket.subList(0, 6));
         this.sourceAddress = new SourceAddress(ethernetPacket.subList(6, 12));

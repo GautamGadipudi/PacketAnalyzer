@@ -17,7 +17,7 @@ public class ECN {
         }
     };
 
-    public ECN(Byte info) {
+    public ECN(Integer info) {
         this.value = Functions.extractBitsAsInteger(info, 7, 2);
     }
 

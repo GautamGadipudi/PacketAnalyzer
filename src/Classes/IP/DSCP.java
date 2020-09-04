@@ -36,7 +36,7 @@ public class DSCP {
         }
     };
 
-    public DSCP(Byte info) {
+    public DSCP(Integer info) {
         this.value = Functions.extractBitsAsInteger(info, 1, 6);
     }
 
