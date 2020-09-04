@@ -1,49 +1,33 @@
+package Classes.Ethernet;
+
+import Classes.Ethernet.DestinationAddress;
+import Classes.Ethernet.EthernetType;
+import Classes.Ethernet.SourceAddress;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class EthernetPacket {
-    public EthernetPacket(ArrayList<Byte> ethernetPacket) {
-        this.setPacketSize(ethernetPacket.size());
-
-    }
-
-    static final int headerSize = 14;
-    static final int addressSize = 6;
-    static final int typeSize = 2;
-
     private int packetSize;
-    private String destinationAddress;
-    private String sourceAddress;
-    private String etherType;
+    private DestinationAddress destinationAddress;
+    private SourceAddress sourceAddress;
+    private EthernetType ethernetType;
 
-    public int getPacketSize() {
-        return packetSize;
+
+    public EthernetPacket(List<Byte> ethernetPacket) {
+        this.packetSize = ethernetPacket.size();
+        this.destinationAddress = new DestinationAddress(ethernetPacket.subList(0, 6));
+        this.sourceAddress = new SourceAddress(ethernetPacket.subList(6, 12));
+        this.ethernetType = new EthernetType(ethernetPacket.subList(12, 14));
     }
 
-    public String getDestinationAddress() {
-        return destinationAddress;
-    }
-
-    public String getSourceAddress() {
-        return sourceAddress;
-    }
-
-    public String getEtherType() {
-        return etherType;
-    }
-
-    public void setPacketSize(int packetSize) {
-        this.packetSize = packetSize;
-    }
-
-    public void setDestinationAddress(String destinationAddress) {
-        this.destinationAddress = destinationAddress;
-    }
-
-    public void setSourceAddress(String sourceAddress) {
-        this.sourceAddress = sourceAddress;
-    }
-
-    public void setEtherType(String etherType) {
-        this.etherType = etherType;
+    @Override
+    public String toString() {
+        return "EthernetPacket{" +
+                "packetSize=" + packetSize +
+                ", destinationAddress=" + destinationAddress +
+                ", sourceAddress=" + sourceAddress +
+                ", ethernetType=" + ethernetType +
+                '}';
     }
 }

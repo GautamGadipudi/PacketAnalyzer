@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
+import Classes.Ethernet.EthernetPacket;
+import Classes.IP.IPPacket;
 
 public class PacketAnalyzer {
 
@@ -27,17 +29,13 @@ public class PacketAnalyzer {
 
     public static void main(String[] args) throws IOException {
         String inputFile = "pkt/new_icmp_packet2.bin";
-        List<String> hex = new ArrayList<>();
+        List<Byte> info = new ArrayList<>();
 
         try (InputStream inputStream = new FileInputStream(inputFile)) {
-            int byteRead;
+            byte byteRead;
 
-            while ((byteRead = inputStream.read()) != -1) {
-                String byteInHex = Integer.toHexString(byteRead);
-                if (byteInHex.length() == 1)
-                    byteInHex = "0" + byteInHex;
-
-                hex.add(byteInHex);
+            while ((byteRead = (byte)inputStream.read()) != -1) {
+                info.add(byteRead);
             }
         }
         catch (IOException ex) {
@@ -46,32 +44,26 @@ public class PacketAnalyzer {
 
         int byteOffset = 0;
 
-        EthernetPacket e = new EthernetPacket();
+        EthernetPacket e = new EthernetPacket(info);
+        IPPacket i = new IPPacket(info.subList(14, 34));
 
-        e.setPacketSize(hex.size());
+        System.out.println(e);
+        System.out.println(i);
 
-        e.setDestinationAddress(String.join(":", hex.subList(byteOffset, byteOffset + ethernetAddressSize)));
-        byteOffset += ethernetAddressSize;
 
-        e.setSourceAddress(String.join(":", hex.subList(byteOffset, byteOffset + ethernetAddressSize)));
-        byteOffset += ethernetAddressSize;
-
-        e.setEtherType(String.join("", hex.subList(byteOffset, byteOffset + ethernetTypeSize)));
-        byteOffset += ethernetTypeSize;
-
-        Util.customPrint("------ Ether Header -----", HeaderType.ETHERNET);
-        Util.customPrint("Packet size = " + e.getPacketSize() + " bytes", HeaderType.ETHERNET);
-        Util.customPrint("Destination MAC address = " + e.getDestinationAddress(), HeaderType.ETHERNET);
-        Util.customPrint("Source MAC address = " + e.getSourceAddress(), HeaderType.ETHERNET);
-        Util.customPrint("EtherType = " + e.getEtherType(), HeaderType.ETHERNET);
-
-        if (e.getEtherType().equals(ethernetTypeIP)) {
-            int ipVersion = Integer.parseInt(String.valueOf(hex.get(byteOffset).charAt(0)));
-            int internetHeaderLength = Integer.parseInt(String.valueOf(hex.get(byteOffset).charAt(1))) * 4;
-
-            Util.customPrint("------ Ether Header -----", HeaderType.IP);
-            Util.customPrint("Version = " + ipVersion, HeaderType.IP);
-            Util.customPrint("Header Length = " + internetHeaderLength, HeaderType.IP);
-        }
+//        Util.customPrint("------ Ether Header -----", HeaderType.ETHERNET);
+//        Util.customPrint("Packet size = " + e.getPacketSize() + " bytes", HeaderType.ETHERNET);
+//        Util.customPrint("Destination MAC address = " + e.getDestinationAddress(), HeaderType.ETHERNET);
+//        Util.customPrint("Source MAC address = " + e.getSourceAddress(), HeaderType.ETHERNET);
+//        Util.customPrint("EtherType = " + e.getEtherType(), HeaderType.ETHERNET);
+//
+//        if (e.getEtherType().equals(ethernetTypeIP)) {
+//            int ipVersion = Integer.parseInt(String.valueOf(hex.get(byteOffset).charAt(0)));
+//            int internetHeaderLength = Integer.parseInt(String.valueOf(hex.get(byteOffset).charAt(1))) * 4;
+//
+//            Util.customPrint("------ Ether Header -----", HeaderType.IP);
+//            Util.customPrint("Version = " + ipVersion, HeaderType.IP);
+//            Util.customPrint("Header Length = " + internetHeaderLength, HeaderType.IP);
+//        }
     }
 }
