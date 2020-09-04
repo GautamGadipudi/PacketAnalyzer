@@ -31,6 +31,10 @@ public class IPPacket {
         this.destinationAddress = new Address(ipPacket.subList(16, 20));
     }
 
+    public int getProtocol() {
+        return protocol.getValue();
+    }
+
     @Override
     public String toString() {
         return "IPPacket{" +

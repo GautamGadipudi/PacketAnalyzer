@@ -6,29 +6,13 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 import Classes.Ethernet.EthernetPacket;
+import Classes.ICMP.ICMPPacket;
 import Classes.IP.IPPacket;
+import Classes.UDP.UDPPacket;
 
 public class PacketAnalyzer {
-
-    // Ethernet header field sizes (in Bytes)
-    static final int ethernetHeaderSize = 14;
-    static final int ethernetAddressSize = 6;
-    static final int ethernetTypeSize = 2;
-
-    static final Dictionary<Integer, String> ethernetTypes = new Hashtable() {
-        {
-            put(0x0800, "IP");
-        }
-    };
-
-    public enum HeaderType {
-        ETHERNET, TCP, UDP, IP
-    }
-
-
-
     public static void main(String[] args) throws IOException {
-        String inputFile = "pkt/new_icmp_packet2.bin";
+        String inputFile = "pkt/new_udp_packet1.bin";
         List<Integer> info = new ArrayList<>();
 
         try (InputStream inputStream = new FileInputStream(inputFile)) {
@@ -42,28 +26,24 @@ public class PacketAnalyzer {
             ex.printStackTrace();
         }
 
-        int byteOffset = 0;
-
         EthernetPacket e = new EthernetPacket(info);
         IPPacket i = new IPPacket(info.subList(14, 34));
 
         System.out.println(e);
         System.out.println(i);
 
+        int protocol = i.getProtocol();
 
-//        Util.customPrint("------ Ether Header -----", HeaderType.ETHERNET);
-//        Util.customPrint("Packet size = " + e.getPacketSize() + " bytes", HeaderType.ETHERNET);
-//        Util.customPrint("Destination MAC address = " + e.getDestinationAddress(), HeaderType.ETHERNET);
-//        Util.customPrint("Source MAC address = " + e.getSourceAddress(), HeaderType.ETHERNET);
-//        Util.customPrint("EtherType = " + e.getEtherType(), HeaderType.ETHERNET);
-//
-//        if (e.getEtherType().equals(ethernetTypeIP)) {
-//            int ipVersion = Integer.parseInt(String.valueOf(hex.get(byteOffset).charAt(0)));
-//            int internetHeaderLength = Integer.parseInt(String.valueOf(hex.get(byteOffset).charAt(1))) * 4;
-//
-//            Util.customPrint("------ Ether Header -----", HeaderType.IP);
-//            Util.customPrint("Version = " + ipVersion, HeaderType.IP);
-//            Util.customPrint("Header Length = " + internetHeaderLength, HeaderType.IP);
-//        }
+        switch (protocol) {
+            case 1:
+                ICMPPacket icmp = new ICMPPacket(info.subList(34, info.size()));
+                System.out.println(icmp);
+                break;
+
+            case 17:
+                UDPPacket udp = new UDPPacket(info.subList(34, info.size()));
+                System.out.println(udp);
+                break;
+        }
     }
 }
