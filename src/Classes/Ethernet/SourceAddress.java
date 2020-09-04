@@ -1,6 +1,6 @@
 package Classes.Ethernet;
 
-import Util.Functions;
+import Util.BinaryFunctions;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public class SourceAddress {
 
     public SourceAddress(List<Integer> address) {
         this.value = address;
-        this.hexValue = Functions.intToHex(address);
+        this.hexValue = BinaryFunctions.intToHex(address);
     }
 
     @Override

@@ -23,11 +23,11 @@ public class EthernetPacket {
 
     @Override
     public String toString() {
-        return "EthernetPacket{" +
-                "packetSize=" + packetSize +
-                ", destinationAddress=" + destinationAddress +
-                ", sourceAddress=" + sourceAddress +
-                ", ethernetType=" + ethernetType +
-                '}';
+        return "Ethernet {" +
+                "\n\tpacketSize=" + packetSize +
+                "\n\t, destinationAddress=" + destinationAddress +
+                "\n\t, sourceAddress=" + sourceAddress +
+                "\n\t, ethernetType=" + ethernetType +
+                "\n}";
     }
 }

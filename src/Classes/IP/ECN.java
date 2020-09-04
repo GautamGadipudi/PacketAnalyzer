@@ -1,6 +1,6 @@
 package Classes.IP;
 
-import Util.Functions;
+import Util.BinaryFunctions;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -18,7 +18,7 @@ public class ECN {
     };
 
     public ECN(Integer info) {
-        this.value = Functions.extractBitsAsInteger(info, 7, 2);
+        this.value = BinaryFunctions.extractBitsAsInteger(info, 7, 2);
     }
 
     @Override

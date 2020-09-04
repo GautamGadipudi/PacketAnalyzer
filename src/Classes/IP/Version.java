@@ -1,12 +1,12 @@
 package Classes.IP;
 
-import Util.Functions;
+import Util.BinaryFunctions;
 
 public class Version {
     private int value;
 
     public Version(Integer info) {
-        this.value = Functions.extractBitsAsInteger(info, 5, 4);
+        this.value = BinaryFunctions.extractBitsAsInteger(info, 5, 4);
     }
 
     @Override

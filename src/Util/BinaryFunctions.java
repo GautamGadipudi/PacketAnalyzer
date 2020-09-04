@@ -3,8 +3,8 @@ package Util;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Functions {
-    private Functions() {
+public final class BinaryFunctions {
+    private BinaryFunctions() {
 
     }
 
@@ -19,7 +19,7 @@ public final class Functions {
             hexChars[i * 2 + 1] = hexArray[v & 0x0F];
         }
 
-        return new String(hexChars);
+        return "0x" + new String(hexChars);
     }
 
     public static int extractBitsAsInteger(int number, int position, int bitCount) {

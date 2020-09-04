@@ -1,6 +1,6 @@
 package Classes.IP;
 
-import Util.Functions;
+import Util.BinaryFunctions;
 
 import java.util.List;
 
@@ -11,10 +11,10 @@ public class Flags {
     private int fragmentOffset;
 
     public Flags(List<Integer> info) {
-        this.value = Functions.getBytesConcatenatedAsInt(info);
+        this.value = BinaryFunctions.getBytesConcatenatedAsInt(info);
         this.dontFragment = (((this.value >> 14) & 1) == 1) ? true : false;
         this.moreFragments = (((this.value >> 13) & 1) == 1) ? true : false;
-        this.fragmentOffset = Functions.extractBitsAsInteger(this.value, 1, 13);
+        this.fragmentOffset = BinaryFunctions.extractBitsAsInteger(this.value, 1, 13);
     }
 
     @Override

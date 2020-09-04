@@ -1,6 +1,6 @@
 package Classes.Ethernet;
 
-import Util.Functions;
+import Util.BinaryFunctions;
 import java.util.List;
 
 public class DestinationAddress {
@@ -10,7 +10,7 @@ public class DestinationAddress {
 
     public DestinationAddress(List<Integer> address) {
         this.value = address;
-        this.hexValue = Functions.intToHex(address);
+        this.hexValue = BinaryFunctions.intToHex(address);
     }
 
     @Override

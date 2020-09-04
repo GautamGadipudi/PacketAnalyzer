@@ -1,6 +1,6 @@
 package Classes.IP;
 
-import Util.Functions;
+import Util.BinaryFunctions;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -37,7 +37,7 @@ public class DSCP {
     };
 
     public DSCP(Integer info) {
-        this.value = Functions.extractBitsAsInteger(info, 1, 6);
+        this.value = BinaryFunctions.extractBitsAsInteger(info, 1, 6);
     }
 
     @Override

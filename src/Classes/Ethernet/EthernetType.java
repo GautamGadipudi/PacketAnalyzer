@@ -1,6 +1,6 @@
 package Classes.Ethernet;
 
-import Util.Functions;
+import Util.BinaryFunctions;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -12,13 +12,13 @@ public class EthernetType {
 
     static final Dictionary<Integer, String> ethernetTypes = new Hashtable() {
         {
-            put("0800", "IP");
+            put("0x0800", "IP");
         }
     };
 
     public EthernetType(List<Integer> ethernetType) {
         this.value = ethernetType;
-        this.hexValue = Functions.intToHex(ethernetType);
+        this.hexValue = BinaryFunctions.intToHex(ethernetType);
     }
 
     @Override
