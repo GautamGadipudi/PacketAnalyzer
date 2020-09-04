@@ -27,7 +27,7 @@ public class UDPPacket {
                 "\n\t, destinationPort=" + destinationPort +
                 "\n\t, length=" + length +
                 "\n\t, checkSum=" + checkSum +
-                "\n\t, data=" + data +
+                "\n\t, data (first 64 bytes only)=" + data +
                 "\n}";
     }
 }

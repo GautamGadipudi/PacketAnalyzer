@@ -36,7 +36,7 @@ public class TCPPacket {
                 "\n\t, flagRow=" + flagRow +
                 "\n\t, checkSum=" + checkSum +
                 "\n\t, urgentPointer='" + urgentPointer + '\'' +
-                "\n\t, data='" + data + '\'' +
+                "\n\t, data (first 64 bytes only)='" + data + '\'' +
                 "\n}";
     }
 }

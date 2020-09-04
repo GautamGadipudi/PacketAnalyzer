@@ -11,7 +11,7 @@ import Classes.UDP.UDPPacket;
 
 public class PacketAnalyzer {
     public static void main(String[] args) throws IOException {
-        String inputFile = "pkt/new_tcp_packet1.bin";
+        String inputFile = "pkt/new_icmp_packet2.bin";
         List<Integer> info = new ArrayList<>();
 
         try (InputStream inputStream = new FileInputStream(inputFile)) {
