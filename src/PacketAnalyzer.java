@@ -11,7 +11,7 @@ import Classes.UDP.UDPPacket;
 
 public class PacketAnalyzer {
     public static void main(String[] args) throws IOException {
-        String inputFile = "pkt/new_icmp_packet2.bin";
+        String inputFile = args[0];
         List<Integer> info = new ArrayList<>();
 
         try (InputStream inputStream = new FileInputStream(inputFile)) {
@@ -26,28 +26,29 @@ public class PacketAnalyzer {
         }
 
         EthernetPacket e = new EthernetPacket(info);
-        IPPacket i = new IPPacket(info.subList(14, 34));
-
         System.out.println(e);
-        System.out.println(i);
 
-        int protocol = i.getProtocol();
+        if (e.getEthernetType().equals("0x0800")) {
+            IPPacket i = new IPPacket(info.subList(14, 34));
+            System.out.println(i);
+            int protocol = i.getProtocol();
 
-        switch (protocol) {
-            case 1:
-                ICMPPacket icmp = new ICMPPacket(info.subList(34, info.size()));
-                System.out.println(icmp);
-                break;
+            switch (protocol) {
+                case 1:
+                    ICMPPacket icmp = new ICMPPacket(info.subList(34, info.size()));
+                    System.out.println(icmp);
+                    break;
 
-            case 17:
-                UDPPacket udp = new UDPPacket(info.subList(34, info.size()));
-                System.out.println(udp);
-                break;
+                case 17:
+                    UDPPacket udp = new UDPPacket(info.subList(34, info.size()));
+                    System.out.println(udp);
+                    break;
 
-            case 6:
-                TCPPacket tcp = new TCPPacket(info.subList(34, info.size()));
-                System.out.println(tcp);
-                break;
+                case 6:
+                    TCPPacket tcp = new TCPPacket(info.subList(34, info.size()));
+                    System.out.println(tcp);
+                    break;
+            }
         }
     }
 }

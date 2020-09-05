@@ -21,6 +21,10 @@ public class EthernetType {
         this.hexValue = BinaryFunctions.intToHex(ethernetType);
     }
 
+    public String getHexValue() {
+        return hexValue;
+    }
+
     @Override
     public String toString() {
         return this.hexValue +

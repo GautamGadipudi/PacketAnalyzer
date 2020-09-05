@@ -21,6 +21,10 @@ public class EthernetPacket {
         this.ethernetType = new EthernetType(ethernetPacket.subList(12, 14));
     }
 
+    public String getEthernetType() {
+        return ethernetType.getHexValue();
+    }
+
     @Override
     public String toString() {
         return "Ethernet {" +
